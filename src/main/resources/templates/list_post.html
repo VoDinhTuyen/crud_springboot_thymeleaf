@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_admin}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>List Post</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+<div class="main-content" layout:fragment="admin_content">
+    <th:block th:if="${message}">
+        <div class="alert alert-success" role="alert">
+            <p th:text="${message}"></p>
+        </div>
+    </th:block>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">ShortDescription</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="item: ${posts}">
+        <tr>
+            <th th:text="${item.id}"></th>
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.shortDescription}"></td>
+            <td>
+                <a th:href="@{/admin/post/edit/{id}(id=${item.id})}">edit</a>
+                &nbsp
+                <a th:href="@{/admin/post/delete/{id}(id=${item.id})}">delete</a>
+            </td>
+        </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+<!-- /.main-content -->
+</body>
+</html>
